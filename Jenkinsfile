@@ -11,24 +11,34 @@ podTemplate(label: 'mypod', containers: [
     node('mypod') {
         stage('Clone repository') {
             container('git') {
-		sh 'mkdir cont'
-		sh 'cd cont'
+                //sh 'mkdir cont'
+                //sh 'cd cont'
                 sh 'git clone https://github.com/Kamalsaiperla/hellocount.git'
-            }
-        }
-        stage('build image'){
-            container('docker'){
-                dir('cont/'){
-                    sh 'ls'
-                    container('dockercompose'){
+                sh 'ls'
+                container('dockercompose'){
+                    dir('hellocount/'){
                         sh 'docker-compose build'
-                        sh 'docker tag cont_web cont_web_1:1.0.4'
+                        //sh 'docker tag cont_web cont_web_1:1.0.4'
                         sh 'docker images'
                         sh 'docker-compose up'
                     }
-                    sh 'docker images'
                 }
             }
         }
+        /*stage('build image'){
+            container('docker'){
+                dir('cont/'){
+                    //sh 'docker images'
+                    //sh 'ls'
+                    //container('dockercompose'){
+                    //    sh 'docker-compose build'
+                    //    sh 'docker tag cont_web cont_web_1:1.0.4'
+                    //    sh 'docker images'
+                    //    sh 'docker-compose up'
+                    //}
+                    sh 'docker images'
+                }
+            }
+        }*/
     }
 }
