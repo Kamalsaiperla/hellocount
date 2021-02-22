@@ -11,15 +11,14 @@ podTemplate(label: 'mypod', containers: [
     node('mypod') {
         stage('Clone repository') {
             container('git') {
-                sh 'whoami'
-                sh 'hostname -i'
+		sh 'mkdir cont'
+		sh 'cd cont'
                 sh 'git clone https://github.com/Kamalsaiperla/hellocount.git'
             }
         }
         stage('build image'){
             container('docker'){
                 dir('cont/'){
-                    sh 'docker images'
                     sh 'ls'
                     container('dockercompose'){
                         sh 'docker-compose build'
