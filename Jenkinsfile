@@ -18,7 +18,7 @@ podTemplate(label: 'mypod', containers: [
                         sh 'docker-compose build'
                         sh 'docker tag hellocount_web pkamalsai/hellocount:$BUILD_NUMBER'
                         sh 'docker images'
-                        //sh 'docker-compose up -d'
+                        sh 'docker-compose up -d'
                     }
                 }
             }
